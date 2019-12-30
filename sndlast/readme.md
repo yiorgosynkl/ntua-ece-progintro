@@ -15,11 +15,11 @@
 
 ## Παράδειγμα εξόδου
 2
+
 ---
 ## Σχέδιο Λύσης
 Με την χρήση των πράξεων mod και div.
 
---- 
 ## Βοηθητικά Λινκ
 - [Program Header](https://www.phusewiki.org/wiki/index.php?title=Program_Header)
 - [C++ datatypes sizes](https://www.tutorialspoint.com/cplusplus/cpp_data_types.htm)
