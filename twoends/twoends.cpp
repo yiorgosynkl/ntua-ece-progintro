@@ -18,29 +18,25 @@ int main(){
     for (long long i=0; i < n_nums; i++)
         cin >> nums[i];
 
-    long long *sum_left = new long long[n_nums]; // sum 0...i
-    long long *sum_right = new long long[n_nums]; // sum i...n-1
-    sum_left[0] = nums[0];
-    sum_right[n_nums - 1] = nums[n_nums - 1];
-    for (long long i = 1; i <= n_nums - 1; i++)
-        sum_left[i] = nums[i] + sum_left[i-1];
-    for (long long i = n_nums - 2; i >= 0; i--)
-        sum_right[i] = nums[i] + sum_right[i+1];
-
     long long sol = 0;
     long long left_idx = 0;
     long long right_idx = n_nums - 1;
+    long long sum_left = nums[left_idx];
+    long long sum_right = nums[right_idx];
 
     while (left_idx < right_idx){
-        if (sum_left[left_idx] < sum_right[right_idx]){
+        if (sum_left < sum_right){
             left_idx++;
+            sum_left += nums[left_idx];
         }
-        else if (sum_left[left_idx] > sum_right[right_idx]){
+        else if (sum_left > sum_right){
             right_idx--;
+            sum_right += nums[right_idx];
         }
         else{
-            sol = sum_left[left_idx];
+            sol = sum_left;
             left_idx++;
+            sum_left += nums[left_idx];
         }
     }
 
