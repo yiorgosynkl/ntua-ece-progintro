@@ -1,9 +1,9 @@
 /**********************************************************************
 * Project           : ntua-ece-progintro
-* Program name      : cb3.cpp
+* Program name      : smthree.cpp
 * Author            : yiorgosynkl (find me in Github: https://github.com/yiorgosynkl)
-* Date created      : 20200121
-* Purpose           : ways a number can be written as sum of 3 cubes
+* Date created      : 20200123
+* Purpose           : return the smallest between three numbers
 **********************************************************************/
 
 #include <iostream>
