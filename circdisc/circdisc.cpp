@@ -2,7 +2,7 @@
 * Project           : ntua-ece-progintro
 * Program name      : circdisc.cpp
 * Author            : yiorgosynkl (find me in Github: https://github.com/yiorgosynkl)
-* Date created      : 20200121
+* Date created      : 20200126
 * Purpose           : where is a 2 dimensional point relevant to the unit circle 
 **********************************************************************/
 
