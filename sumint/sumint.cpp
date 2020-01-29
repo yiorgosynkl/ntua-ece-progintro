@@ -35,8 +35,10 @@ int main(){
         else{
             sum -= nums[left_idx];
             left_idx++;
-            if (left_idx > right_idx)
+            if (left_idx > right_idx){
                 right_idx++;
+                sum = nums[right_idx];
+            }
         }
         // cout << res << endl;
     }
