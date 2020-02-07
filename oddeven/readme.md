@@ -30,3 +30,6 @@
 ```
 ## Παράδειγμα εξόδου 3
 ```0```
+
+## Λύση
+- [Leetcode](https://leetcode.com/articles/contiguous-array/)
