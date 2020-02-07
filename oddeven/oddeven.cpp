@@ -11,33 +11,39 @@ using namespace std;
 
 int main(){
 
-    long n_nums, alpha;
+    long n_nums = 0, alpha = 0, counter = 0;
     cin >> n_nums;
-    int *nums = new int[n_nums];
+    // count saves a counter with difference of odd and even number (pos if odd are more, neg if even are more)
+    // whenever we find two equal numbers in count array => they have equal amount of even and odd nums inbetween (edges of subarray)
+    long *count = new long[n_nums];
+    long min_count = +2, max_count = -2;
     for (long i = 0; i < n_nums; i++){
         cin >> alpha;
-        if ( alpha % 2 == 1)
-            nums[i] = 1;
+        if (alpha % 2 == 1) 
+            counter++;
         else
-            nums[i] = -1;
+            counter--;
+        min_count = min(counter, min_count);
+        max_count = max(counter, max_count);
+        count[i] = counter;
     }
 
-    long *sum_left = new long[n_nums];
-    sum_left[0] = nums[0];
-    for (long i = 1; i < n_nums; i++)
-        sum_left[i] = sum_left[i-1] + nums[i];
+    // for each value of count [min...max], save the first time (index) it showed up
+    long n_first = max_count - min_count + 1;
+    long *first = new long[n_first];
+    // initialise with not a valid idx
+    for (long i = 0; i < n_first; i++)
+        first[i] = -1;
 
-    for (long i = 0; i < n_nums; i++)
-        cout << sum_left[i] << " ";
-
-    cout << endl;
-
-    long mmin = +5, mmax = -5;
+    long sol = 0;
     for (long i = 0; i < n_nums; i++){
-        mmin = min(sum_left[i], mmin);
-        mmax = max(sum_left[i], mmax);
+        if (first[count[i] - min_count] == -1) // first time we find the number
+            first[count[i] - min_count] = i;
+        else
+            sol = max(sol, i - first[count[i] - min_count]);
     }
-    cout << mmax << " " << mmin << endl;
+
+    cout << sol << endl;
 
     return 0;
 }
