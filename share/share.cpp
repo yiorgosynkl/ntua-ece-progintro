@@ -10,12 +10,12 @@
 #include <math.h>       /* cbrt */
 using namespace std;
 
-long long max(long long alpha, long long bravo, long long charlie){
-    long long maximum = alpha;
-    maximum = max(maximum, bravo);
-    maximum = max(maximum, charlie);
-    return maximum;
-}
+// long long max(long long alpha, long long bravo, long long charlie){
+//     long long maximum = alpha;
+//     maximum = max(maximum, bravo);
+//     maximum = max(maximum, charlie);
+//     return maximum;
+// }
 
 int main(){
 
@@ -31,12 +31,32 @@ int main(){
     for (long i = 1; i < n_nums; i++)
         sums[i] = sums[i-1] + nums[i];
 
-    long left_end_idx = 0, mid_end_idx = 1; 
-    long long left_sum = sums[left_end_idx];
-    long long mid_sum = sums[mid_end_idx] - sums[left_end_idx]; 
-    long long right_sum = sums[n_nums - 1] - sums[mid_end_idx];
+    long long sol = sums[n_nums - 1]; // sol can be 1 to sum of all (binary search)
+    long long left = 1, right = sums[n_nums - 1];
+    long long mid = (left + right) / 2; // div operation
 
-    long long sol = max(left_sum, mid_sum, right_sum);
+    // cout << mid << endl;
+    long subsum_idx = 0;
+    long last_sum = 0;
+
+    while (mid > left){
+        last_sum = 0;
+        for (int i = 0; i < 3; i++){
+            while (sums[subsum_idx] - last_sum <= mid && subsum_idx < n_nums)
+                subsum_idx++;
+            if (subsum_idx > 0)
+                last_sum = sums[subsum_idx - 1];
+            else
+                last_sum = 0;
+        }
+        if (subsum_idx == n_nums) // the goal is achievable
+            left = mid;
+        else
+            right = mid;
+        mid = (left + right) / 2;            
+    }
+
+    cout << mid << endl;
 
     return 0;
 }
