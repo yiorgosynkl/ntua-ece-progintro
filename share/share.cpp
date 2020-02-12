@@ -10,12 +10,11 @@
 #include <math.h>       /* cbrt */
 using namespace std;
 
-// long long max(long long alpha, long long bravo, long long charlie){
-//     long long maximum = alpha;
-//     maximum = max(maximum, bravo);
-//     maximum = max(maximum, charlie);
-//     return maximum;
-// }
+long long max(long long alpha, long long bravo){
+    if ( alpha > bravo )
+        return alpha;
+    return bravo;
+}
 
 int main(){
 
@@ -26,13 +25,13 @@ int main(){
     for (long i = 0; i < n_nums; i++)
         cin >> nums[i];
 
-    long long *sums = new long long [n_nums];
-    sums[0] = nums[0];
+    long long *sum_left = new long long [n_nums];
+    sum_left[0] = nums[0];
     for (long i = 1; i < n_nums; i++)
-        sums[i] = sums[i-1] + nums[i];
+        sum_left[i] = sum_left[i-1] + nums[i];
 
-    long long sol = sums[n_nums - 1]; // sol can be 1 to sum of all (binary search)
-    long long left = 1, right = sums[n_nums - 1];
+    long long sol = sum_left[n_nums - 1]; // sol can be 1 to sum of all (binary search)
+    long long left = 1, right = sum_left[n_nums - 1];
     long long mid = (left + right) / 2; // div operation
 
     // cout << mid << endl;
@@ -40,23 +39,21 @@ int main(){
     long last_sum = 0;
 
     while (mid > left){
-        last_sum = 0;
+        last_sum = 0; subsum_idx = 0;
+        // cout << "mid is: " << mid << endl;
         for (int i = 0; i < 3; i++){
-            while (sums[subsum_idx] - last_sum <= mid && subsum_idx < n_nums)
+            while (sum_left[subsum_idx] - last_sum <= mid && subsum_idx < n_nums)
                 subsum_idx++;
-            if (subsum_idx > 0)
-                last_sum = sums[subsum_idx - 1];
-            else
-                last_sum = 0;
+            last_sum = sum_left[max(subsum_idx - 1, 0)];
         }
         if (subsum_idx == n_nums) // the goal is achievable
-            left = mid;
-        else
             right = mid;
+        else
+            left = mid;
         mid = (left + right) / 2;            
     }
 
-    cout << mid << endl;
+    cout << right << endl;
 
     return 0;
 }
