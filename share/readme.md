@@ -49,3 +49,6 @@
 ```
 ## Παράδειγμα εξόδου 2
 ```15```
+
+## Χρήσιμα λινκς
+- [geeksforgeeks](https://www.geeksforgeeks.org/split-the-given-array-into-k-sub-arrays-such-that-maximum-sum-of-all-sub-arrays-is-minimum/)
